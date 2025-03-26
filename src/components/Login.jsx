@@ -1,21 +1,20 @@
-import React from 'React';
-import { useState } from 'react/cjs/react.development';
+import React, {useState } from 'react';
 import { login } from "../utils/api"; 
 
-function LoginForm() {
+function Login() {
     // hold the login information with states 
-
     // name 
-    const [name, setName] = useState(); 
+    const [name, setName] = useState(""); 
     // email 
-    const [email, setEmail] = useState();
+    const [email, setEmail] = useState("");
     // set the error 
-    const [error, setError] = useState();
+    const [error, setError] = useState(null);
 
     // function for handling Submit Button (200, error)
     function handleSubmit() {
         try {
-            // submit
+            // submit 
+             console.log()
         } catch (error) {
             // error
             console.log("Failed in Login.jsx", error);
@@ -25,24 +24,31 @@ function LoginForm() {
 
     return (
         <form onSubmit={handleSubmit}>
+            <label htmlFor='name'>Name*</label>
             <input
                 type="text"
-                placeholder="Name"
-                value='Name'
-                onChange={(e) => changethestate}
+                placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
-            > Name*
+            > 
             </input>
+            <label htmlFor='email'>Email*</label>
             <input 
                 type="email"
                 placeholder="email@provider.com"
-                value="email"
-                onChange={(e) => changethestate}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
-            > Email*
+            > 
             </input>
+            <button
+                type="submit"
+            > Login
+            </button>
+            {error && <p>{error}</p>}
         </form>
     )
 }
 
-export default LoginForm;
+export default Login;
