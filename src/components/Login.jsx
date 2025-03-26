@@ -1,5 +1,7 @@
 import React, {useState } from 'react';
-import { login } from "../utils/api"; 
+import { redirect } from 'react-router';
+import { loginAPI } from "../utils/api"; 
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     // hold the login information with states 
@@ -9,12 +11,16 @@ function Login() {
     const [email, setEmail] = useState("");
     // set the error 
     const [error, setError] = useState(null);
+    // Navigate 
+    const navigate = useNavigate();
 
     // function for handling Submit Button (200, error)
-    function handleSubmit() {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         try {
             // submit 
-             console.log()
+             await loginAPI(name, email);
+             navigate("/dogs");
         } catch (error) {
             // error
             console.log("Failed in Login.jsx", error);
